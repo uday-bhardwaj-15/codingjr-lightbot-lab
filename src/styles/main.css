@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: all;
+}
+
+@source "../index.html";
+@source "../src/**/*.js";
+
+@plugin "daisyui/theme" {
+  name: "lightbot";
+  prefersdark: false;
+  /* set as default dark mode (prefers-color-scheme:dark) */
+  color-scheme: light;
+  /* color of browser-provided UI */
+
+  /* Original Lightbot palette (from src/develop/css/lightbot.css) */
+  --color-base-100: #4b4646;
+  --color-base-200: #5c5c5c;
+  --color-base-300: #777777;
+  --color-base-content: #fffff2;
+
+  --color-primary: #a3cfc6;
+  --color-primary-content: #222222;
+
+  --color-secondary: #7ca6ba;
+  --color-secondary-content: #fffff2;
+
+  --color-accent: #e59700;
+  --color-accent-content: #222222;
+
+  --color-neutral: #4b4646;
+  --color-neutral-content: #fffff2;
+
+  --color-info: #7ca6ba;
+  --color-info-content: #222222;
+  --color-success: #a3cfc6;
+  --color-success-content: #222222;
+  --color-warning: #fbeea4;
+  --color-warning-content: #222222;
+  --color-error: #d9534f;
+  --color-error-content: #fffff2;
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+}
+
+/* Non-Tailwind assets / legacy helpers kept as small component classes */
+@layer components {
+  .achievement {
+    background-image: var(--lb-achievement-bg);
+    width: 32px;
+    height: 32px;
+  }
+
+  .medal {
+    background-image: var(--lb-medals-bg);
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+  }
+
+  .medal-gold {
+    background-position: -32px 0;
+  }
+
+  .medal-silver {
+    background-position: -64px 0;
+  }
+
+  .medal-bronze {
+    background-position: -96px 0;
+  }
+
+  .lb-level-tile .medal {
+    position: absolute;
+    right: 0.35rem;
+    bottom: 0.35rem;
+    pointer-events: none;
+  }
+
+  .lb-level-tile--completed {
+    outline: 2px solid color-mix(in oklab, var(--color-primary) 60%, transparent);
+    outline-offset: 2px;
+  }
+
+  .flip {
+    transform: scaleX(-1);
+  }
+
+  /* SortableJS visuals */
+  .sortable-ghost {
+    opacity: 0.4;
+  }
+
+  .lb-dragging {
+    width: auto;
+  }
+
+  .lb-drop-active {
+    /* Draw the highlight inside the element so overflow containers don't clip it. */
+    outline: 2px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
+    outline-offset: -2px;
+  }
+
+  .lb-drop-hover {
+    /* Draw the highlight inside the element so overflow containers don't clip it. */
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+
+  /* Instruction palette/program differences */
+  #instructionsContainer .lb-instruction-delete {
+    display: none !important;
+  }
+
+  /* don't show a repeat-body in the instruction palette */
+  #instructionsContainer .lb-repeat-body {
+    display: none;
+  }
+
+  /* Instruction item styling */
+  .lb-instruction {
+    @apply select-none;
+  }
+
+  .lb-instruction-label {
+    @apply text-xs py-1;
+  }
+
+  .lb-instruction-row {
+    @apply flex content-center items-center justify-between gap-2 border border-base-300 bg-base-100 px-2 py-1 text-sm font-semibold rounded-[var(--rounded-btn)];
+  }
+
+  #instructionsContainer .lb-instruction-row {
+    @apply cursor-grab;
+  }
+
+  /* don't show a repeat-body while the instruction is being dragged into the program container */
+  #programContainer .sortable-ghost .lb-repeat-body {
+    display: none;
+  }
+
+  /* make a box with bg and border around the two parts of a repeat instruction but only when in the program container */
+  #programContainer .lb-instruction:has(> .repeat) {
+    @apply border border-base-300 bg-base-100 px-0 py-0 text-sm font-semibold rounded-[var(--rounded-btn)];
+  }
+
+  /* change the border around the instruction row for a repeat instruction when in the program container */
+  #programContainer .repeat {
+    @apply border-0 border-b;
+  }
+
+  /* change the border around the body for a repeat instruction when in the program container */
+  .lb-repeat-body-inner {
+    @apply mt-2 border-t border-base-300 bg-base-100 p-2 rounded-[var(--rounded-box)];
+  }
+
+  #programContainer .lb-instruction-row {
+    @apply cursor-grab;
+  }
+
+  .lb-repeat-body-inner>ul {
+    min-height: 2.5rem;
+  }
+}

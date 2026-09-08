@@ -1,0 +1,50 @@
+name: Release Offline Build
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Use pinned npm
+        run: npm install --global npm@11.19.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build offline bundle
+        run: npm run build
+
+      - name: Create zip archive
+        id: package
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          ZIP_NAME="lightbot-${TAG}.zip"
+          cd dist
+          zip -r "../${ZIP_NAME}" .
+          cd ..
+          echo "zip_name=${ZIP_NAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release and upload archive
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Lightbot ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: ${{ steps.package.outputs.zip_name }}
+          generate_release_notes: true
