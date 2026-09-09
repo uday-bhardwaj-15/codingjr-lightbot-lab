@@ -13,14 +13,14 @@ export function createAchievements(params) {
   var achievements = {
     achievementsList: [
       {
-        name: 'lightbot_achievement_complete_level',
+        name: 'codingjr_achievement_complete_level',
         i18nKey: 'achievements.completeLevel',
         check: function() {
           return true;
         }
       },
       {
-        name: 'lightbot_achievement_earn_gold_medal',
+        name: 'codingjr_achievement_earn_gold_medal',
         i18nKey: 'achievements.earnGoldMedal',
         check: function() {
           if (bot.getNumberOfInstructions() <= map.getMedals().gold) {
@@ -30,7 +30,7 @@ export function createAchievements(params) {
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_5',
+        name: 'codingjr_achievement_complete_levels_5',
         i18nKey: 'achievements.completeLevels5',
         check: function() {
           if (getCompletedLevelCount() >= 5) {
@@ -40,7 +40,7 @@ export function createAchievements(params) {
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_10',
+        name: 'codingjr_achievement_complete_levels_10',
         i18nKey: 'achievements.completeLevels10',
         check: function() {
           if (getCompletedLevelCount() >= 10) {
@@ -50,7 +50,7 @@ export function createAchievements(params) {
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_15',
+        name: 'codingjr_achievement_complete_levels_15',
         i18nKey: 'achievements.completeLevels15',
         check: function() {
           if (getCompletedLevelCount() >= 15) {
@@ -60,21 +60,21 @@ export function createAchievements(params) {
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_bronze',
+        name: 'codingjr_achievement_complete_levels_bronze',
         i18nKey: 'achievements.completeLevelsBronze',
         check: function() {
           return getMedalCount(medals.bronze) === map.getNbrOfLevels();
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_silver',
+        name: 'codingjr_achievement_complete_levels_silver',
         i18nKey: 'achievements.completeLevelsSilver',
         check: function() {
           return getMedalCount(medals.silver) === map.getNbrOfLevels();
         }
       },
       {
-        name: 'lightbot_achievement_complete_levels_gold',
+        name: 'codingjr_achievement_complete_levels_gold',
         i18nKey: 'achievements.completeLevelsGold',
         check: function() {
           return getMedalCount(medals.gold) === map.getNbrOfLevels();
@@ -103,7 +103,7 @@ export function createAchievements(params) {
     // count completed levels from storage.
     var count = 0;
     for (var i = 0; i < map.getNbrOfLevels(); i++) {
-      if (storage.getItem('lightbot_level_' + i)) {
+      if (storage.getItem('codingjr_level_' + i)) {
         count++;
       }
     }
@@ -114,7 +114,7 @@ export function createAchievements(params) {
     // count levels at or above the requested medal quality.
     var count = 0;
     for (var i = 0; i < map.getNbrOfLevels(); i++) {
-      if (storage.getItem('lightbot_level_' + i) && parseInt(storage.getItem('lightbot_level_' + i), 10) >= quality) {
+      if (storage.getItem('codingjr_level_' + i) && parseInt(storage.getItem('codingjr_level_' + i), 10) >= quality) {
         count++;
       }
     }

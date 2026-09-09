@@ -6,7 +6,7 @@ export function createEditor(params) {
   var map = params.map;
   var instructions = params.instructions;
   var storage = params.storage || localStorage;
-  var PROGRAM_STORAGE_PREFIX = "lightbot_program_level_";
+  var PROGRAM_STORAGE_PREFIX = "codingjr_program_level_";
   var PROGRAM_STORAGE_VERSION = 1;
   if (!map) throw new Error("createEditor: missing map");
   if (!instructions) throw new Error("createEditor: missing instructions");
@@ -90,7 +90,7 @@ export function createEditor(params) {
       } else if (p.classList.contains("repeat")) {
         var input = li.querySelector('input[type="number"]');
         var count = normalizeRepeatCount(input ? input.value : 2);
-        var bodyUl = li.querySelector(".lb-repeat-body ul");
+        var bodyUl = li.querySelector(".cjr-repeat-body ul");
         var bodyItems = getListItems(bodyUl);
         // recurse into the repeat body.
         var body = getProgramDataFromItems(bodyItems);
@@ -124,7 +124,7 @@ export function createEditor(params) {
           input.setAttribute("value", String(count));
         }
 
-        var bodyUl = li.querySelector(".lb-repeat-body ul");
+        var bodyUl = li.querySelector(".cjr-repeat-body ul");
         if (bodyUl) {
           bodyUl.textContent = "";
           buildProgramListFromData(bodyUl, Array.isArray(entry.body) ? entry.body : []);
@@ -167,9 +167,9 @@ export function createEditor(params) {
   }
 
   function clearDropHover(exceptEl) {
-    var hovered = document.querySelectorAll("#programContainer ul.lb-drop-hover");
+    var hovered = document.querySelectorAll("#programContainer ul.cjr-drop-hover");
     forEachNode(hovered, function (el) {
-      if (el !== exceptEl && el.classList) el.classList.remove("lb-drop-hover");
+      if (el !== exceptEl && el.classList) el.classList.remove("cjr-drop-hover");
     });
   }
 
@@ -180,13 +180,13 @@ export function createEditor(params) {
     _normalizeRepeatRows: function (root) {
       // ensure repeat label + count are grouped after drag/restore.
       var scope = root || document;
-      var rows = scope.querySelectorAll("p.repeat.lb-instruction-row");
+      var rows = scope.querySelectorAll("p.repeat.cjr-instruction-row");
 
       forEachNode(rows, function (row) {
         if (!row || !row.children) return;
 
         for (var i = 0; i < row.children.length; i++) {
-          if (row.children[i].classList && row.children[i].classList.contains("lb-repeat-left")) return;
+          if (row.children[i].classList && row.children[i].classList.contains("cjr-repeat-left")) return;
         }
 
         var label = null;
@@ -195,15 +195,15 @@ export function createEditor(params) {
         for (var j = 0; j < row.children.length; j++) {
           var child = row.children[j];
           if (!child || !child.classList) continue;
-          if (child.classList.contains("lb-instruction-label")) label = child;
-          if (child.classList.contains("lb-repeat-count")) count = child;
-          if (child.classList.contains("lb-instruction-delete")) deleteBtn = child;
+          if (child.classList.contains("cjr-instruction-label")) label = child;
+          if (child.classList.contains("cjr-repeat-count")) count = child;
+          if (child.classList.contains("cjr-instruction-delete")) deleteBtn = child;
         }
 
         if (!label || !count) return;
 
         var left = document.createElement("span");
-        left.className = "lb-repeat-left flex items-center gap-2";
+        left.className = "cjr-repeat-left flex items-center gap-2";
         left.appendChild(label);
         left.appendChild(count);
 
@@ -239,7 +239,7 @@ export function createEditor(params) {
       container.addEventListener("click", function (e) {
         var target = e.target;
         if (!target || !target.closest) return;
-        var btn = target.closest(".lb-instruction-delete");
+        var btn = target.closest(".cjr-instruction-delete");
         if (!btn || !container.contains(btn)) return;
         var li = btn.closest("li");
         if (li) li.remove();
@@ -292,7 +292,7 @@ export function createEditor(params) {
       buildProgramListFromData(mainProgramList, parsed.program);
 
       // Strip any transient drag/drop CSS classes so the restored DOM isn't "stuck" in a drag state.
-      var classesToRemove = ["lb-drop-active", "lb-drop-hover", "sortable-ghost", "sortable-chosen", "lb-dragging"];
+      var classesToRemove = ["cjr-drop-active", "cjr-drop-hover", "sortable-ghost", "sortable-chosen", "cjr-dragging"];
       var targets = [mainProgramList];
       var descendants = mainProgramList.querySelectorAll("*");
       for (var i = 0; i < descendants.length; i++) targets.push(descendants[i]);
@@ -334,35 +334,35 @@ export function createEditor(params) {
 
       this._instructionSortable = Sortable.create(instructionList, {
         group: {
-          name: "lightbot-instructions",
+          name: "codingjr-instructions",
           pull: "clone",
           put: false,
         },
         sort: false,
         draggable: "li",
         handle: "p",
-        filter: "input, .lb-instruction-delete",
+        filter: "input, .cjr-instruction-delete",
         preventOnFilter: false,
         emptyInsertThreshold: 5,
         swapThreshold: 0.5,
         animation: 150,
-        dragClass: "lb-dragging",
+        dragClass: "cjr-dragging",
         ghostClass: "sortable-ghost",
         chosenClass: "sortable-chosen",
         onStart: function () {
-          addClassAllProgramLists("lb-drop-active");
+          addClassAllProgramLists("cjr-drop-active");
         },
         onEnd: function () {
           var lists = getAllProgramLists();
           forEachNode(lists, function (el) {
             if (!el || !el.classList) return;
-            el.classList.remove("lb-drop-active", "lb-drop-hover");
+            el.classList.remove("cjr-drop-active", "cjr-drop-hover");
           });
         },
         onMove: function (evt) {
           if (evt && evt.to && evt.to.classList) {
             clearDropHover(evt.to);
-            evt.to.classList.add("lb-drop-hover");
+            evt.to.classList.add("cjr-drop-hover");
           }
         },
       });
@@ -385,39 +385,39 @@ export function createEditor(params) {
       forEachNode(lists, function (listEl) {
         if (!listEl || !listEl.parentNode) return;
         if (!listEl.closest || !listEl.closest("#programContainer")) return;
-        if (listEl._lightbotSortable) return;
+        if (listEl._codingjrSortable) return;
 
-        listEl._lightbotSortable = Sortable.create(listEl, {
+        listEl._codingjrSortable = Sortable.create(listEl, {
           group: {
-            name: "lightbot-program",
+            name: "codingjr-program",
             pull: true,
-            put: ["lightbot-program", "lightbot-instructions"],
+            put: ["codingjr-program", "codingjr-instructions"],
           },
           sort: true,
           draggable: "li",
           handle: "p",
-          filter: "input, .lb-instruction-delete",
+          filter: "input, .cjr-instruction-delete",
           preventOnFilter: false,
           emptyInsertThreshold: 5,
           swapThreshold: 0.5,
           animation: 150,
-          dragClass: "lb-dragging",
+          dragClass: "cjr-dragging",
           ghostClass: "sortable-ghost",
           chosenClass: "sortable-chosen",
           onStart: function () {
-            addClassAllProgramLists("lb-drop-active");
+            addClassAllProgramLists("cjr-drop-active");
           },
           onEnd: function () {
             var lists = getAllProgramLists();
             forEachNode(lists, function (el) {
               if (!el || !el.classList) return;
-              el.classList.remove("lb-drop-active", "lb-drop-hover");
+              el.classList.remove("cjr-drop-active", "cjr-drop-hover");
             });
           },
           onMove: function (evt) {
             if (evt && evt.to && evt.to.classList) {
               clearDropHover(evt.to);
-              evt.to.classList.add("lb-drop-hover");
+              evt.to.classList.add("cjr-drop-hover");
             }
           },
           onAdd: function (evt) {
@@ -445,7 +445,7 @@ export function createEditor(params) {
           },
         });
 
-        self._programSortables.push(listEl._lightbotSortable);
+        self._programSortables.push(listEl._codingjrSortable);
       });
     },
 
@@ -479,7 +479,7 @@ export function createEditor(params) {
         } else if (p.classList.contains("repeat")) {
           var input = li.querySelector('input[type="number"]');
           var counter = input ? input.value : 2;
-          var bodyUl = li.querySelector(".lb-repeat-body ul");
+          var bodyUl = li.querySelector(".cjr-repeat-body ul");
           var bodyLis = [];
           if (bodyUl && bodyUl.children) {
             for (var j = 0; j < bodyUl.children.length; j++) {

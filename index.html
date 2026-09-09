@@ -1,21 +1,21 @@
 <!doctype html>
-<html data-theme="lightbot">
+<html data-theme="codingjr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LightBot v1.3.7</title>
+    <title>CodingJr Bot Lab</title>
     <link rel="shortcut icon" href="img/favicon.ico" />
     <script>
       (function () {
         try {
-          var theme = localStorage.getItem("theme");
-          if (theme) document.documentElement.setAttribute("data-theme", theme);
+          var theme = localStorage.getItem("theme") || "codingjr";
+          document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {}
       })();
     </script>
-    <!-- lightbot:entry:start -->
+    <!-- codingjr:entry:start -->
     <script type="module" src="/src/main.js"></script>
-    <!-- lightbot:entry:end -->
+    <!-- codingjr:entry:end -->
   </head>
 
   <body
@@ -25,132 +25,319 @@
       <audio id="audioPlayer" preload="auto"></audio>
     </div>
 
-    <div id="lightbot" class="relative w-[980px] h-[740px]">
+    <div id="codingjr-app" class="relative w-[980px] h-[740px]">
       <div
         id="welcomeScreen"
-        class="lb-screen absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow overflow-hidden bg-no-repeat bg-left-top bg-cover"
-        style="background-image: url(&quot;img/welcome_screen_bg.png&quot;)"
+        class="cjr-screen absolute top-5 inset-x-0 bottom-4 rounded-box shadow-xl overflow-hidden flex flex-col items-center justify-between py-6 px-4 select-none"
+        style="
+          background: linear-gradient(
+            135deg,
+            #fdfbf7 0%,
+            #ffffff 45%,
+            #ecf8fa 100%
+          );
+        "
       >
-        <div class="absolute bottom-4 left-4 flex flex-wrap gap-2">
-          <button class="helpButton btn btn-sm gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              class="size-4"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-6 3.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM7.293 5.293a1 1 0 1 1 .99 1.667c-.459.134-1.033.566-1.033 1.29v.25a.75.75 0 1 0 1.5 0v-.115a2.5 2.5 0 1 0-2.518-4.153.75.75 0 1 0 1.061 1.06Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span data-i18n="welcomeScreen.help"></span>
-          </button>
-          <button class="achievementsButton btn btn-sm gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              class="size-4"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M12 1.69a.494.494 0 0 0-.438-.494 32.352 32.352 0 0 0-7.124 0A.494.494 0 0 0 4 1.689v.567c-.811.104-1.612.24-2.403.406a.75.75 0 0 0-.595.714 4.5 4.5 0 0 0 4.35 4.622A3.99 3.99 0 0 0 7 8.874V10H6a1 1 0 0 0-1 1v2h-.667C3.597 13 3 13.597 3 14.333c0 .368.298.667.667.667h8.666a.667.667 0 0 0 .667-.667c0-.736-.597-1.333-1.333-1.333H11v-2a1 1 0 0 0-1-1H9V8.874a3.99 3.99 0 0 0 1.649-.876 4.5 4.5 0 0 0 4.35-4.622.75.75 0 0 0-.596-.714A30.897 30.897 0 0 0 12 2.256v-.567ZM4 3.768c-.49.066-.976.145-1.458.235a3.004 3.004 0 0 0 1.64 2.192A3.999 3.999 0 0 1 4 5V3.769Zm8 0c.49.066.976.145 1.458.235a3.004 3.004 0 0 1-1.64 2.192C11.936 5.818 12 5.416 12 5V3.769Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            <span data-i18n="welcomeScreen.achievements"></span>
-          </button>
-          <button class="levelSelectButton btn btn-sm btn-primary gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="size-4 fill-current"
-            >
-              <path d="M8 5v14l11-7-11-7Z" />
-            </svg>
-            <span data-i18n="welcomeScreen.start"></span>
-          </button>
-          <button
-            class="audioToggleButton btn btn-sm btn-square"
-            data-i18n-title="welcomeScreen.toggleAudio"
-            title="Toggle audio"
+        <!-- Background Corner Circuit SVG Ornaments -->
+        <div class="absolute bottom-0 left-0 pointer-events-none opacity-40">
+          <svg
+            width="220"
+            height="220"
+            viewBox="0 0 220 220"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              class="lb-audio-on hidden size-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                d="M10.5 3.75a.75.75 0 0 0-1.264-.546L5.203 7H2.667a.75.75 0 0 0-.7.48A6.985 6.985 0 0 0 1.5 10c0 .887.165 1.737.468 2.52.111.29.39.48.7.48h2.535l4.033 3.796a.75.75 0 0 0 1.264-.546V3.75ZM16.45 5.05a.75.75 0 0 0-1.06 1.061 5.5 5.5 0 0 1 0 7.778.75.75 0 0 0 1.06 1.06 7 7 0 0 0 0-9.899Z"
-              />
-              <path
-                d="M14.329 7.172a.75.75 0 0 0-1.061 1.06 2.5 2.5 0 0 1 0 3.536.75.75 0 0 0 1.06 1.06 4 4 0 0 0 0-5.656Z"
-              />
-            </svg>
-            <svg
-              class="lb-audio-off size-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                d="M10.047 3.062a.75.75 0 0 1 .453.688v12.5a.75.75 0 0 1-1.264.546L5.203 13H2.667a.75.75 0 0 1-.7-.48A6.985 6.985 0 0 1 1.5 10c0-.887.165-1.737.468-2.52a.75.75 0 0 1 .7-.48h2.535l4.033-3.796a.75.75 0 0 1 .811-.142ZM13.78 7.22a.75.75 0 1 0-1.06 1.06L14.44 10l-1.72 1.72a.75.75 0 0 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L16.56 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L15.5 8.94l-1.72-1.72Z"
-              />
-            </svg>
-          </button>
-          <select
-            id="languageSelect"
-            class="select select-sm w-36 bg-base-100/80 backdrop-blur shadow"
-            data-i18n-title="welcomeScreen.language"
-            title="Language"
+            <path
+              d="M0 180 H60 L100 140 H160 L190 110 V60"
+              stroke="#7dd3fc"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="190" cy="60" r="4" fill="#0284c7" />
+            <path
+              d="M0 140 H40 L70 110 H120 L150 80 V20"
+              stroke="#bae6fd"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="150" cy="20" r="4" fill="#38bdf8" />
+            <path
+              d="M0 210 H90 L130 170 H180"
+              stroke="#94a3b8"
+              stroke-width="1.5"
+              stroke-dasharray="4 4"
+              stroke-linecap="round"
+            />
+            <circle cx="180" cy="170" r="3" fill="#94a3b8" />
+          </svg>
+        </div>
+
+        <div class="absolute bottom-0 right-0 pointer-events-none opacity-40">
+          <svg
+            width="220"
+            height="220"
+            viewBox="0 0 220 220"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="fr">Français</option>
-          </select>
-          <select
-            data-choose-theme
-            class="select select-sm w-36 bg-base-100/80 backdrop-blur shadow"
+            <path
+              d="M220 180 H160 L120 140 H60 L30 110 V60"
+              stroke="#7dd3fc"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="30" cy="60" r="4" fill="#0284c7" />
+            <path
+              d="M220 140 H180 L150 110 H100 L70 80 V20"
+              stroke="#bae6fd"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="70" cy="20" r="4" fill="#38bdf8" />
+            <path
+              d="M220 210 H130 L90 170 H40"
+              stroke="#94a3b8"
+              stroke-width="1.5"
+              stroke-dasharray="4 4"
+              stroke-linecap="round"
+            />
+            <circle cx="40" cy="170" r="3" fill="#94a3b8" />
+          </svg>
+        </div>
+
+        <!-- Top Logo -->
+        <div class="mt-3 flex items-center justify-center">
+          <img
+            src="img/codingjr.webp"
+            alt="CodingJr Logo"
+            class="h-12 md:h-14 w-auto max-w-[240px] object-contain drop-shadow-sm transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+
+        <!-- Title & Subtitle -->
+        <div class="text-center px-4 -mt-4">
+          <h1
+            class="text-2xl md:text-4xl font-black text-slate-900 tracking-tight"
+            data-i18n="welcomeScreen.title"
           >
-            <option value="lightbot">lightbot</option>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-            <option value="cupcake">cupcake</option>
-            <option value="bumblebee">bumblebee</option>
-            <option value="emerald">emerald</option>
-            <option value="corporate">corporate</option>
-            <option value="synthwave">synthwave</option>
-            <option value="retro">retro</option>
-            <option value="cyberpunk">cyberpunk</option>
-            <option value="valentine">valentine</option>
-            <option value="halloween">halloween</option>
-            <option value="garden">garden</option>
-            <option value="forest">forest</option>
-            <option value="aqua">aqua</option>
-            <option value="lofi">lofi</option>
-            <option value="pastel">pastel</option>
-            <option value="wireframe">wireframe</option>
-            <option value="black">black</option>
-            <option value="luxury">luxury</option>
-            <option value="dracula">dracula</option>
-            <option value="cmyk">cmyk</option>
-            <option value="autumn">autumn</option>
-            <option value="business">business</option>
-            <option value="acid">acid</option>
-            <option value="lemonade">lemonade</option>
-            <option value="night">night</option>
-            <option value="coffee">coffee</option>
-            <option value="winter">winter</option>
-          </select>
+            Welcome to the Lab
+          </h1>
+          <p
+            class="text-sm md:text-base text-slate-600 mt-2 font-semibold"
+            data-i18n="welcomeScreen.subtitle"
+          >
+            Learn logical thinking and programming with fun challenges.
+          </p>
+        </div>
+
+        <!-- Central Robot Graphic -->
+        <div
+          class="flex items-center justify-center my-auto py-2 w-full max-w-[580px]"
+        >
+          <img
+            src="img/robot.webp"
+            alt="CodingJr Robot Mascot"
+            class="w-full max-h-[250px] object-contain drop-shadow-md select-none pointer-events-none transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+
+        <!-- Bottom Floating Navigation Dock / Capsule -->
+        <div class="w-full flex justify-center pb-2 z-10">
+          <div
+            class="bg-slate-200/85 dark:bg-slate-800/90 backdrop-blur-md rounded-2xl p-2 px-3 shadow-xl border border-white/70 dark:border-slate-700/60 flex items-center justify-between gap-3 w-full max-w-[840px]"
+          >
+            <!-- GUIDES Button -->
+            <button
+              class="helpButton btn btn-ghost btn-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-white/60 dark:hover:bg-slate-700/60 rounded-xl px-3 gap-2 normal-case text-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-4 text-slate-700 dark:text-slate-200"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-1.5 0v-.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a2 2 0 1 1 3.938.5c-.066.329-.35.65-.65.9-.344.286-.62.515-.71.722-.113.26-.078.47-.078.628a.75.75 0 0 1-1.5 0c0-.332.062-.714.288-1.077.21-.336.527-.6.82-.843.203-.17.392-.328.434-.492A.5.5 0 0 0 10 7.5a.5.5 0 0 0-.5.5.75.75 0 0 1-1.5 0A2 2 0 0 1 8 8Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span data-i18n="welcomeScreen.guides">GUIDES</span>
+            </button>
+
+            <!-- MY TRACKS Button -->
+            <button
+              class="achievementsButton btn btn-ghost btn-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-white/60 dark:hover:bg-slate-700/60 rounded-xl px-3 gap-2 normal-case text-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="size-4 text-slate-700 dark:text-slate-200"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+              <span data-i18n="welcomeScreen.myTracks">MY TRACKS</span>
+            </button>
+
+            <!-- START LAB SESSION Button -->
+            <button
+              class="levelSelectButton btn btn-sm bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold px-6 rounded-xl shadow-md border-0 gap-2 normal-case text-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-4"
+              >
+                <path d="M8 5v14l11-7-11-7Z" />
+              </svg>
+              <span data-i18n="welcomeScreen.start">START LAB SESSION</span>
+            </button>
+
+            <!-- LANGUAGE Badge (English Default) -->
+            <div
+              class="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 text-sm font-semibold px-2 select-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-4 shrink-0 text-slate-700 dark:text-slate-200"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM9.555 3.033A6.502 6.502 0 0 0 4.103 8h3.987a17.29 17.29 0 0 1 1.465-4.967ZM8.09 9.5H3.57a6.505 6.505 0 0 0 0 1h4.52c-.068-.328-.09-.66-.09-1Zm.16 2.5H4.103a6.502 6.502 0 0 0 5.452 4.967A17.288 17.288 0 0 1 8.25 12ZM9.59 10.5h.82c.046.68.14 1.348.277 2H9.313a15.82 15.82 0 0 1-.277-2Zm.82-1h-.82a15.82 15.82 0 0 1 .277-2h1.564c-.137.652-.231 1.32-.277 2Zm1.49 4.967c.602-.74 1.107-1.597 1.49-2.534h1.507a6.502 6.502 0 0 1-5.452 4.967ZM12.91 9.5h4.52a6.505 6.505 0 0 0 0-1h-4.52c.068.328.09.66.09 1Zm-.16-2.5h4.147a6.502 6.502 0 0 0-5.452-4.967A17.288 17.288 0 0 1 12.75 7ZM10.445 3.033c-.602.74-1.107 1.597-1.49 2.534H7.391a6.502 6.502 0 0 1 3.054-2.534Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="text-xs font-semibold whitespace-nowrap">Language: English</span>
+            </div>
+
+            <!-- SETTINGS Dropdown -->
+            <div id="settingsDropdown" class="dropdown dropdown-top dropdown-end">
+              <button
+                type="button"
+                id="settingsDropdownBtn"
+                class="btn btn-ghost btn-sm font-bold text-slate-700 dark:text-slate-200 hover:bg-white/60 dark:hover:bg-slate-700/60 rounded-xl px-2.5 gap-1.5 normal-case text-sm cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.84 1.804A1 1 0 0 1 8.82 1h2.36a1 1 0 0 1 .98.804l.331 1.652a6.993 6.993 0 0 1 1.929 1.115l1.598-.54a1 1 0 0 1 1.186.447l1.18 2.044a1 1 0 0 1-.205 1.251l-1.267 1.113a7.047 7.047 0 0 1 0 2.228l1.267 1.113a1 1 0 0 1 .206 1.25l-1.18 2.045a1 1 0 0 1-1.187.447l-1.598-.54a6.993 6.993 0 0 1-1.929 1.115l-.33 1.652a1 1 0 0 1-.98.804H8.82a1 1 0 0 1-.98-.804l-.331-1.652a6.993 6.993 0 0 1-1.929-1.115l-1.598.54a1 1 0 0 1-1.186-.447l-1.18-2.044a1 1 0 0 1 .205-1.251l1.267-1.114a7.05 7.05 0 0 1 0-2.227L1.821 7.773a1 1 0 0 1-.206-1.25l1.18-2.045a1 1 0 0 1 1.187-.447l1.598.54A6.993 6.993 0 0 1 7.51 3.456l.33-1.652ZM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span data-i18n="welcomeScreen.settings">Settings</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-3 opacity-60"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <div
+                tabindex="0"
+                class="dropdown-content menu p-3 shadow-2xl bg-base-100/95 backdrop-blur-md rounded-2xl w-60 border border-base-300 mb-2 space-y-2.5 z-50"
+              >
+                <div class="flex items-center justify-between px-1">
+                  <span
+                    class="text-xs font-bold uppercase opacity-70"
+                    data-i18n="welcomeScreen.toggleAudio"
+                    >Audio Sound</span
+                  >
+                  <button
+                    class="audioToggleButton btn btn-xs btn-circle btn-ghost"
+                    data-i18n-title="welcomeScreen.toggleAudio"
+                    title="Toggle audio"
+                  >
+                    <svg
+                      class="cjr-audio-on hidden size-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M10.5 3.75a.75.75 0 0 0-1.264-.546L5.203 7H2.667a.75.75 0 0 0-.7.48A6.985 6.985 0 0 0 1.5 10c0 .887.165 1.737.468 2.52.111.29.39.48.7.48h2.535l4.033 3.796a.75.75 0 0 0 1.264-.546V3.75ZM16.45 5.05a.75.75 0 0 0-1.06 1.061 5.5 5.5 0 0 1 0 7.778.75.75 0 0 0 1.06 1.06 7 7 0 0 0 0-9.899Z"
+                      />
+                    </svg>
+                    <svg
+                      class="cjr-audio-off size-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M10.047 3.062a.75.75 0 0 1 .453.688v12.5a.75.75 0 0 1-1.264.546L5.203 13H2.667a.75.75 0 0 1-.7-.48A6.985 6.985 0 0 1 1.5 10c0-.887.165-1.737.468-2.52a.75.75 0 0 1 .7-.48h2.535l4.033-3.796a.75.75 0 0 1 .811-.142ZM13.78 7.22a.75.75 0 1 0-1.06 1.06L14.44 10l-1.72 1.72a.75.75 0 0 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L16.56 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L15.5 8.94l-1.72-1.72Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <div class="px-1">
+                  <label
+                    class="text-xs font-bold uppercase opacity-70 block mb-1"
+                    data-i18n="welcomeScreen.theme"
+                    >Theme</label
+                  >
+                  <select
+                    data-choose-theme
+                    class="select select-bordered select-xs w-full"
+                  >
+                    <option value="codingjr">codingjr</option>
+                    <option value="light">light</option>
+                    <option value="dark">dark</option>
+                    <option value="cupcake">cupcake</option>
+                    <option value="bumblebee">bumblebee</option>
+                    <option value="emerald">emerald</option>
+                    <option value="corporate">corporate</option>
+                    <option value="synthwave">synthwave</option>
+                    <option value="retro">retro</option>
+                    <option value="cyberpunk">cyberpunk</option>
+                    <option value="valentine">valentine</option>
+                    <option value="halloween">halloween</option>
+                    <option value="garden">garden</option>
+                    <option value="forest">forest</option>
+                    <option value="aqua">aqua</option>
+                    <option value="lofi">lofi</option>
+                    <option value="pastel">pastel</option>
+                    <option value="wireframe">wireframe</option>
+                    <option value="black">black</option>
+                    <option value="luxury">luxury</option>
+                    <option value="dracula">dracula</option>
+                    <option value="cmyk">cmyk</option>
+                    <option value="autumn">autumn</option>
+                    <option value="business">business</option>
+                    <option value="acid">acid</option>
+                    <option value="lemonade">lemonade</option>
+                    <option value="night">night</option>
+                    <option value="coffee">coffee</option>
+                    <option value="winter">winter</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div
         id="achievementsScreen"
-        class="lb-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6 flex flex-col gap-4"
+        class="cjr-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6 flex flex-col gap-4"
       >
         <h1
           class="text-3xl font-black uppercase"
@@ -176,7 +363,7 @@
 
       <div
         id="helpScreen"
-        class="lb-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6"
+        class="cjr-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6"
       >
         <div class="grid grid-cols-[1fr_12px_400px] gap-6 h-full">
           <div
@@ -347,7 +534,7 @@
 
       <div
         id="levelSelectScreen"
-        class="lb-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6 flex flex-col gap-4"
+        class="cjr-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-6 flex flex-col gap-4"
       >
         <h1
           class="text-3xl font-black uppercase"
@@ -373,7 +560,7 @@
 
       <div
         id="gameScreen"
-        class="lb-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-2"
+        class="cjr-screen hidden absolute top-5 inset-x-0 bottom-4 rounded-box bg-base-100 shadow p-2"
       >
         <div class="grid grid-cols-[690px_1fr] gap-2 h-full">
           <div class="relative">
@@ -413,7 +600,7 @@
                 title="Toggle audio"
               >
                 <svg
-                  class="lb-audio-on hidden size-5"
+                  class="cjr-audio-on hidden size-5"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -426,7 +613,7 @@
                   />
                 </svg>
                 <svg
-                  class="lb-audio-off size-5"
+                  class="cjr-audio-off size-5"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -462,14 +649,14 @@
                 title="Run"
               >
                 <svg
-                  class="lb-run-icon size-4 fill-current"
+                  class="cjr-run-icon size-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
                   <path d="M8 5v14l11-7-11-7Z" />
                 </svg>
                 <svg
-                  class="lb-stop-icon hidden size-4 fill-current"
+                  class="cjr-stop-icon hidden size-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -502,15 +689,15 @@
                 </h2>
                 <div class="overflow-auto max-h-[220px]">
                   <ul class="space-y-0">
-                    <li class="lb-instruction">
-                      <p class="walk lb-instruction-row">
+                    <li class="cjr-instruction">
+                      <p class="walk cjr-instruction-row">
                         <span
-                          class="lb-instruction-label"
+                          class="cjr-instruction-label"
                           data-i18n="instructions.walk"
                         ></span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -525,15 +712,15 @@
                         </button>
                       </p>
                     </li>
-                    <li class="lb-instruction">
-                      <p class="turnRight lb-instruction-row">
+                    <li class="cjr-instruction">
+                      <p class="turnRight cjr-instruction-row">
                         <span
-                          class="lb-instruction-label"
+                          class="cjr-instruction-label"
                           data-i18n="instructions.turnRight"
                         ></span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -548,15 +735,15 @@
                         </button>
                       </p>
                     </li>
-                    <li class="lb-instruction">
-                      <p class="turnLeft lb-instruction-row">
+                    <li class="cjr-instruction">
+                      <p class="turnLeft cjr-instruction-row">
                         <span
-                          class="lb-instruction-label"
+                          class="cjr-instruction-label"
                           data-i18n="instructions.turnLeft"
                         ></span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -571,15 +758,15 @@
                         </button>
                       </p>
                     </li>
-                    <li class="lb-instruction">
-                      <p class="jump lb-instruction-row">
+                    <li class="cjr-instruction">
+                      <p class="jump cjr-instruction-row">
                         <span
-                          class="lb-instruction-label"
+                          class="cjr-instruction-label"
                           data-i18n="instructions.jump"
                         ></span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -594,15 +781,15 @@
                         </button>
                       </p>
                     </li>
-                    <li class="lb-instruction">
-                      <p class="light lb-instruction-row">
+                    <li class="cjr-instruction">
+                      <p class="light cjr-instruction-row">
                         <span
-                          class="lb-instruction-label"
+                          class="cjr-instruction-label"
                           data-i18n="instructions.light"
                         ></span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -617,14 +804,16 @@
                         </button>
                       </p>
                     </li>
-                    <li class="lb-instruction">
-                      <p class="repeat lb-instruction-row">
-                        <span class="lb-repeat-left flex items-center gap-2">
+                    <li class="cjr-instruction">
+                      <p class="repeat cjr-instruction-row">
+                        <span class="cjr-repeat-left flex items-center gap-2">
                           <span
-                            class="lb-instruction-label"
+                            class="cjr-instruction-label"
                             data-i18n="instructions.repeat.label"
                           ></span>
-                          <span class="lb-repeat-count flex items-center gap-2">
+                          <span
+                            class="cjr-repeat-count flex items-center gap-2"
+                          >
                             <input
                               type="number"
                               min="1"
@@ -641,7 +830,7 @@
                         </span>
                         <button
                           type="button"
-                          class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
+                          class="cjr-instruction-delete btn btn-ghost btn-xs btn-square"
                           title="Remove"
                         >
                           <svg
@@ -655,8 +844,8 @@
                           </svg>
                         </button>
                       </p>
-                      <div class="lb-repeat-body droppable">
-                        <div class="lb-repeat-body-inner">
+                      <div class="cjr-repeat-body droppable">
+                        <div class="cjr-repeat-body-inner">
                           <ul class="space-y-2"></ul>
                         </div>
                       </div>

@@ -1,27 +1,27 @@
 // Composition root for the game: builds the `app` object by assembling models, UI, and rendering extensions.
-import { createAppShell } from "./lightbot.model.game.js";
-import { createDirections } from "./lightbot.model.directions.js";
-import { createBox } from "./lightbot.model.box.js";
-import { createLightBox } from "./lightbot.model.lightbox.js";
-import { createBotInstructions } from "./lightbot.model.bot.instructions.js";
-import { createBot } from "./lightbot.model.bot.js";
-import { createMap } from "./lightbot.model.map.js";
-import { createMapState } from "./lightbot.model.map.state.js";
-import { createMedals } from "./lightbot.model.medals.js";
-import { createAchievements } from "./lightbot.model.achievements.js";
+import { createAppShell } from "./codingjr.model.game.js";
+import { createDirections } from "./codingjr.model.directions.js";
+import { createBox } from "./codingjr.model.box.js";
+import { createLightBox } from "./codingjr.model.lightbox.js";
+import { createBotInstructions } from "./codingjr.model.bot.instructions.js";
+import { createBot } from "./codingjr.model.bot.js";
+import { createMap } from "./codingjr.model.map.js";
+import { createMapState } from "./codingjr.model.map.state.js";
+import { createMedals } from "./codingjr.model.medals.js";
+import { createAchievements } from "./codingjr.model.achievements.js";
 
-import { Projection } from "./lightbot.view.canvas.projection.js";
-import { extendMapView } from "./lightbot.view.canvas.map.js";
-import { extendBoxView } from "./lightbot.view.canvas.box.js";
-import { createBotAnimations } from "./lightbot.view.canvas.bot.animations.js";
-import { extendBotView } from "./lightbot.view.canvas.bot.js";
-import { extendMedalsView } from "./lightbot.view.canvas.medals.js";
-import { extendAchievementsView } from "./lightbot.view.canvas.achievements.js";
+import { Projection } from "./codingjr.view.canvas.projection.js";
+import { extendMapView } from "./codingjr.view.canvas.map.js";
+import { extendBoxView } from "./codingjr.view.canvas.box.js";
+import { createBotAnimations } from "./codingjr.view.canvas.bot.animations.js";
+import { extendBotView } from "./codingjr.view.canvas.bot.js";
+import { extendMedalsView } from "./codingjr.view.canvas.medals.js";
+import { extendAchievementsView } from "./codingjr.view.canvas.achievements.js";
 
-import { createUi } from "./lightbot.view.canvas.ui.js";
-import { createEditor } from "./lightbot.view.canvas.ui.editor.js";
-import { createDialogs } from "./lightbot.view.canvas.ui.dialogs.js";
-import { createMedia } from "./lightbot.view.canvas.ui.media.js";
+import { createUi } from "./codingjr.view.canvas.ui.js";
+import { createEditor } from "./codingjr.view.canvas.ui.editor.js";
+import { createDialogs } from "./codingjr.view.canvas.ui.dialogs.js";
+import { createMedia } from "./codingjr.view.canvas.ui.media.js";
 
 export function createApp() {
   var app = createAppShell();

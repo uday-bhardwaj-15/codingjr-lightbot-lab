@@ -1,59 +1,47 @@
 @import "tailwindcss";
+@import "daisyui/themes.css";
 
-@plugin "daisyui" {
-  themes: all;
-}
+@plugin "daisyui";
 
 @source "../index.html";
 @source "../src/**/*.js";
 
-@plugin "daisyui/theme" {
-  name: "lightbot";
-  prefersdark: false;
-  /* set as default dark mode (prefers-color-scheme:dark) */
+/* Custom Brand Theme: CodingJr */
+[data-theme="codingjr"],
+:root:has(input.theme-controller[value=codingjr]:checked) {
   color-scheme: light;
-  /* color of browser-provided UI */
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(96% 0.015 240);
+  --color-base-300: oklch(90% 0.02 240);
+  --color-base-content: oklch(20% 0.03 260);
 
-  /* Original Lightbot palette (from src/develop/css/lightbot.css) */
-  --color-base-100: #4b4646;
-  --color-base-200: #5c5c5c;
-  --color-base-300: #777777;
-  --color-base-content: #fffff2;
+  --color-primary: oklch(55% 0.22 250);
+  --color-primary-content: oklch(98% 0 0);
 
-  --color-primary: #a3cfc6;
-  --color-primary-content: #222222;
+  --color-secondary: oklch(65% 0.18 220);
+  --color-secondary-content: oklch(98% 0 0);
 
-  --color-secondary: #7ca6ba;
-  --color-secondary-content: #fffff2;
+  --color-accent: oklch(75% 0.18 70);
+  --color-accent-content: oklch(20% 0.03 260);
 
-  --color-accent: #e59700;
-  --color-accent-content: #222222;
+  --color-neutral: oklch(25% 0.03 260);
+  --color-neutral-content: oklch(96% 0.01 240);
 
-  --color-neutral: #4b4646;
-  --color-neutral-content: #fffff2;
+  --color-info: oklch(65% 0.18 220);
+  --color-info-content: oklch(98% 0 0);
+  --color-success: oklch(68% 0.18 150);
+  --color-success-content: oklch(98% 0 0);
+  --color-warning: oklch(80% 0.18 80);
+  --color-warning-content: oklch(20% 0.03 260);
+  --color-error: oklch(65% 0.22 25);
+  --color-error-content: oklch(98% 0 0);
 
-  --color-info: #7ca6ba;
-  --color-info-content: #222222;
-  --color-success: #a3cfc6;
-  --color-success-content: #222222;
-  --color-warning: #fbeea4;
-  --color-warning-content: #222222;
-  --color-error: #d9534f;
-  --color-error-content: #fffff2;
-
-  /* border radius */
-  --radius-selector: 1rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-
-  /* base sizes */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
-
-  /* border size */
   --border: 1px;
-
-  /* effects */
   --depth: 1;
   --noise: 0;
 }
@@ -61,13 +49,13 @@
 /* Non-Tailwind assets / legacy helpers kept as small component classes */
 @layer components {
   .achievement {
-    background-image: var(--lb-achievement-bg);
+    background-image: var(--cjr-achievement-bg);
     width: 32px;
     height: 32px;
   }
 
   .medal {
-    background-image: var(--lb-medals-bg);
+    background-image: var(--cjr-medals-bg);
     width: 32px;
     height: 32px;
     background-repeat: no-repeat;
@@ -85,14 +73,14 @@
     background-position: -96px 0;
   }
 
-  .lb-level-tile .medal {
+  .cjr-level-tile .medal {
     position: absolute;
     right: 0.35rem;
     bottom: 0.35rem;
     pointer-events: none;
   }
 
-  .lb-level-tile--completed {
+  .cjr-level-tile--completed {
     outline: 2px solid color-mix(in oklab, var(--color-primary) 60%, transparent);
     outline-offset: 2px;
   }
@@ -106,56 +94,56 @@
     opacity: 0.4;
   }
 
-  .lb-dragging {
+  .cjr-dragging {
     width: auto;
   }
 
-  .lb-drop-active {
+  .cjr-drop-active {
     /* Draw the highlight inside the element so overflow containers don't clip it. */
     outline: 2px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
     outline-offset: -2px;
   }
 
-  .lb-drop-hover {
+  .cjr-drop-hover {
     /* Draw the highlight inside the element so overflow containers don't clip it. */
     outline: 2px solid var(--color-primary);
     outline-offset: -2px;
   }
 
   /* Instruction palette/program differences */
-  #instructionsContainer .lb-instruction-delete {
+  #instructionsContainer .cjr-instruction-delete {
     display: none !important;
   }
 
   /* don't show a repeat-body in the instruction palette */
-  #instructionsContainer .lb-repeat-body {
+  #instructionsContainer .cjr-repeat-body {
     display: none;
   }
 
   /* Instruction item styling */
-  .lb-instruction {
+  .cjr-instruction {
     @apply select-none;
   }
 
-  .lb-instruction-label {
+  .cjr-instruction-label {
     @apply text-xs py-1;
   }
 
-  .lb-instruction-row {
+  .cjr-instruction-row {
     @apply flex content-center items-center justify-between gap-2 border border-base-300 bg-base-100 px-2 py-1 text-sm font-semibold rounded-[var(--rounded-btn)];
   }
 
-  #instructionsContainer .lb-instruction-row {
+  #instructionsContainer .cjr-instruction-row {
     @apply cursor-grab;
   }
 
   /* don't show a repeat-body while the instruction is being dragged into the program container */
-  #programContainer .sortable-ghost .lb-repeat-body {
+  #programContainer .sortable-ghost .cjr-repeat-body {
     display: none;
   }
 
   /* make a box with bg and border around the two parts of a repeat instruction but only when in the program container */
-  #programContainer .lb-instruction:has(> .repeat) {
+  #programContainer .cjr-instruction:has(> .repeat) {
     @apply border border-base-300 bg-base-100 px-0 py-0 text-sm font-semibold rounded-[var(--rounded-btn)];
   }
 
@@ -165,15 +153,15 @@
   }
 
   /* change the border around the body for a repeat instruction when in the program container */
-  .lb-repeat-body-inner {
+  .cjr-repeat-body-inner {
     @apply mt-2 border-t border-base-300 bg-base-100 p-2 rounded-[var(--rounded-box)];
   }
 
-  #programContainer .lb-instruction-row {
+  #programContainer .cjr-instruction-row {
     @apply cursor-grab;
   }
 
-  .lb-repeat-body-inner>ul {
+  .cjr-repeat-body-inner>ul {
     min-height: 2.5rem;
   }
 }

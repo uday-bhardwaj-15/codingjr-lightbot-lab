@@ -1,15 +1,22 @@
 // i18n resource table used by i18next. Keys match `data-i18n` / `data-i18n-title` attributes in `index.html`.
-export const LIGHTBOT_TRANSLATIONS_DE = {
+export const CODINGJR_TRANSLATIONS_DE = {
   "controls": {
     "run": "Start",
     "stop": "Stopp"
   },
   "welcomeScreen": {
-    "start": "Spiel starten",
+    "logoPlaceholder": "PLATZIERE DEIN LOGO HIER",
+    "title": "Willkommen im Codingjr Lab",
+    "subtitle": "Ein Raum zum Programmierenlernen für alle Altersgruppen.",
+    "guides": "ANLEITUNGEN",
+    "myTracks": "MEINE ERFOLGE",
+    "start": "LAB-SITZUNG STARTEN",
     "toggleAudio": "Audio umschalten",
-    "help": "Hilfe",
-    "achievements": "Erfolge",
-    "language": "Sprache"
+    "help": "Anleitungen",
+    "achievements": "Meine Erfolge",
+    "language": "Sprache",
+    "settings": "Einstellungen",
+    "theme": "Design"
   },
   "levelSelectScreen": {
     "title": "Levelauswahl",

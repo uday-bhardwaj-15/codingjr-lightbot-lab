@@ -2,17 +2,17 @@
 import "./styles/main.css";
 
 var assetBaseUrl = import.meta.env.BASE_URL || "/";
-document.documentElement.style.setProperty("--lb-achievement-bg", 'url("' + assetBaseUrl + 'img/achievement.png")');
-document.documentElement.style.setProperty("--lb-medals-bg", 'url("' + assetBaseUrl + 'img/medals.png")');
+document.documentElement.style.setProperty("--cjr-achievement-bg", 'url("' + assetBaseUrl + 'img/achievement.png")');
+document.documentElement.style.setProperty("--cjr-medals-bg", 'url("' + assetBaseUrl + 'img/medals.png")');
 
 import { themeChange } from "theme-change";
 
-import { createApp } from "./lightbot/app.js";
+import { createApp } from "./codingjr/app.js";
 
-import { initCanvasView } from "./lightbot/lightbot.view.canvas.js";
-import { initI18n } from "./lightbot/lightbot.view.canvas.ui.translate.js";
-import { initDialogs } from "./lightbot/lightbot.view.canvas.ui.dialogs.js";
-import { initHistory } from "./lightbot/lightbot.view.canvas.ui.history.js";
+import { initCanvasView } from "./codingjr/codingjr.view.canvas.js";
+import { initI18n } from "./codingjr/codingjr.view.canvas.ui.translate.js";
+import { initDialogs } from "./codingjr/codingjr.view.canvas.ui.dialogs.js";
+import { initHistory } from "./codingjr/codingjr.view.canvas.ui.history.js";
 
 function runWhenDomReady(fn) {
   if (document.readyState === "loading") {
@@ -22,10 +22,61 @@ function runWhenDomReady(fn) {
   }
 }
 
+function initThemeController() {
+  var savedTheme = localStorage.getItem("theme") || "codingjr";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+
+  var themeSelects = document.querySelectorAll("select[data-choose-theme]");
+  themeSelects.forEach(function (select) {
+    if (select.querySelector('option[value="' + savedTheme + '"]')) {
+      select.value = savedTheme;
+    }
+    select.addEventListener("change", function () {
+      var nextTheme = this.value || "codingjr";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      try {
+        localStorage.setItem("theme", nextTheme);
+      } catch (e) {}
+      themeSelects.forEach(function (s) {
+        if (s !== select && s.querySelector('option[value="' + nextTheme + '"]')) {
+          s.value = nextTheme;
+        }
+      });
+    });
+  });
+
+  themeChange(false);
+}
+
+function initSettingsPopover() {
+  var dropdown = document.getElementById("settingsDropdown");
+  var btn = document.getElementById("settingsDropdownBtn");
+  if (!dropdown || !btn) return;
+
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle("dropdown-open");
+  });
+
+  var content = dropdown.querySelector(".dropdown-content");
+  if (content) {
+    content.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove("dropdown-open");
+    }
+  });
+}
+
 async function boot() {
   // `createApp()` is the composition root: it wires together all models + UI + rendering extensions.
   var app = createApp();
-  themeChange(false);
+  initThemeController();
+  initSettingsPopover();
 
   // Hook up DOM elements and event handlers once the document is ready.
   if (app.ui && app.ui.media && typeof app.ui.media.init === "function") app.ui.media.init();
@@ -45,6 +96,6 @@ async function boot() {
 
 runWhenDomReady(function () {
   boot().catch(function (e) {
-    console.error("Lightbot boot failed:", e);
+    console.error("CodingJr boot failed:", e);
   });
 });

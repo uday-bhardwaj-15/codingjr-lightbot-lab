@@ -25,8 +25,8 @@ export function createMedals(params) {
         medal = this.bronze;
       }
       // only store the result if it's an improvement.
-      if (!storage.getItem('lightbot_level_' + map.getLevelNumber()) || parseInt(storage.getItem('lightbot_level_' + map.getLevelNumber()), 10) < medal) {
-        storage.setItem('lightbot_level_' + map.getLevelNumber(), medal);
+      if (!storage.getItem('codingjr_level_' + map.getLevelNumber()) || parseInt(storage.getItem('codingjr_level_' + map.getLevelNumber()), 10) < medal) {
+        storage.setItem('codingjr_level_' + map.getLevelNumber(), medal);
       }
       return medal;
     }

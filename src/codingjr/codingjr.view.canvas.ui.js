@@ -26,7 +26,7 @@ export function createUi(params) {
 
   function hideAllScreens() {
     // hide all screens before showing the next one.
-    var screens = document.querySelectorAll(".lb-screen");
+    var screens = document.querySelectorAll(".cjr-screen");
     for (var i = 0; i < screens.length; i++) screens[i].classList.add("hidden");
   }
 
@@ -59,9 +59,9 @@ export function createUi(params) {
       btn.classList.toggle("btn-error", isRunning);
       btn.setAttribute("title", isRunning ? i18next.t("controls.stop") : i18next.t("gameScreen.run"));
 
-      var runIcon = btn.querySelector(".lb-run-icon");
+      var runIcon = btn.querySelector(".cjr-run-icon");
       if (runIcon && runIcon.classList) runIcon.classList.toggle("hidden", isRunning);
-      var stopIcon = btn.querySelector(".lb-stop-icon");
+      var stopIcon = btn.querySelector(".cjr-stop-icon");
       if (stopIcon && stopIcon.classList) stopIcon.classList.toggle("hidden", !isRunning);
     },
 
@@ -70,7 +70,7 @@ export function createUi(params) {
       ui._setRenderLoopState(false);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "welcomeScreen" });
-      document.title = "Lightbot - Welcome";
+      document.title = "CodingJr - Welcome";
 
       hideAllScreens();
       showScreen("welcomeScreen");
@@ -81,7 +81,7 @@ export function createUi(params) {
       ui._setRenderLoopState(false);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "helpScreen" });
-      document.title = "Lightbot - Help";
+      document.title = "CodingJr - Help";
 
       hideAllScreens();
       showScreen("helpScreen");
@@ -137,7 +137,7 @@ export function createUi(params) {
       }
 
       if (hist == null && ui.History) ui.History.pushState({ page: "achievementsScreen" });
-      document.title = "Lightbot - Achievements";
+      document.title = "CodingJr - Achievements";
 
       hideAllScreens();
       showScreen("achievementsScreen");
@@ -152,14 +152,14 @@ export function createUi(params) {
 
       // build the level tiles with medal state from storage.
       for (var i = 0; i < map.getNbrOfLevels(); i++) {
-        var item = parseInt(storage.getItem("lightbot_level_" + i), 10);
+        var item = parseInt(storage.getItem("codingjr_level_" + i), 10);
         var medal = "";
 
         if (!levelList) continue;
         var tile = document.createElement("div");
         tile.className =
-          "lb-level-tile relative select-none w-34 h-30 rounded-box bg-base-200 hover:bg-base-300 shadow cursor-pointer flex items-center justify-center text-4xl font-black";
-        if (item) tile.classList.add("lb-level-tile--completed");
+          "cjr-level-tile relative select-none w-34 h-30 rounded-box bg-base-200 hover:bg-base-300 shadow cursor-pointer flex items-center justify-center text-4xl font-black";
+        if (item) tile.classList.add("cjr-level-tile--completed");
         tile.dataset.level = String(i);
         tile.textContent = String(i);
 
@@ -191,7 +191,7 @@ export function createUi(params) {
       }
 
       if (hist == null && ui.History) ui.History.pushState({ page: "levelSelectScreen" });
-      document.title = "Lightbot - Level Select";
+      document.title = "CodingJr - Level Select";
 
       hideAllScreens();
       showScreen("levelSelectScreen");
@@ -203,7 +203,7 @@ export function createUi(params) {
       map.loadMap(level);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "gameScreen", level: level });
-      document.title = "Lightbot - Level " + level;
+      document.title = "CodingJr - Level " + level;
 
       hideAllScreens();
 
@@ -212,7 +212,7 @@ export function createUi(params) {
       if (programList) programList.textContent = "";
 
       // Restore the player's saved program for this level (if present).
-      if (storage.getItem("lightbot_program_level_" + level)) {
+      if (storage.getItem("codingjr_program_level_" + level)) {
         editor.loadProgram();
       }
 
@@ -250,7 +250,7 @@ export function createUi(params) {
       var levelList = document.getElementById("levelList");
       if (levelList) {
         levelList.addEventListener("click", function (e) {
-          var tile = e.target && e.target.closest ? e.target.closest(".lb-level-tile") : null;
+          var tile = e.target && e.target.closest ? e.target.closest(".cjr-level-tile") : null;
           if (!tile) return;
           // open the selected level.
           ui.showGameScreen(parseInt(tile.getAttribute("data-level"), 10));

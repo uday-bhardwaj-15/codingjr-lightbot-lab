@@ -1,20 +1,20 @@
 // i18next setup and DOM translation pass for elements with `data-i18n*` attributes.
 import i18next from "i18next";
-import { LIGHTBOT_TRANSLATIONS_DE } from "../locales/translations.de.js";
-import { LIGHTBOT_TRANSLATIONS_EN } from "../locales/translations.en.js";
-import { LIGHTBOT_TRANSLATIONS_FR } from "../locales/translations.fr.js";
+import { CODINGJR_TRANSLATIONS_DE } from "../locales/translations.de.js";
+import { CODINGJR_TRANSLATIONS_EN } from "../locales/translations.en.js";
+import { CODINGJR_TRANSLATIONS_FR } from "../locales/translations.fr.js";
 
-var LANGUAGE_STORAGE_KEY = "lightbot_language";
+var LANGUAGE_STORAGE_KEY = "codingjr_language";
 var FALLBACK_LANGUAGE = "en";
 var TRANSLATION_RESOURCES = {
   en: {
-    translation: LIGHTBOT_TRANSLATIONS_EN,
+    translation: CODINGJR_TRANSLATIONS_EN,
   },
   de: {
-    translation: LIGHTBOT_TRANSLATIONS_DE,
+    translation: CODINGJR_TRANSLATIONS_DE,
   },
   fr: {
-    translation: LIGHTBOT_TRANSLATIONS_FR,
+    translation: CODINGJR_TRANSLATIONS_FR,
   },
 };
 

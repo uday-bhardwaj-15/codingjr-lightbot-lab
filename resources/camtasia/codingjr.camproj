@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <Project_Data Version="7.00">
 <Project_Settings>
 <ProfileName>Web</ProfileName>
@@ -33,7 +33,7 @@
 <Bookmarks>0</Bookmarks>
 </UI_Layout>
 
-<AutoSaveFile>C:\Users\Laurent\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\lightbot2d89a9.autosave.camproj</AutoSaveFile>
+<AutoSaveFile>C:\Users\CodingJr\AppData\Local\TechSmith\Camtasia Studio\7.0\Auto-Saves\codingjr2d89a9.autosave.camproj</AutoSaveFile>
 
 <ProjectID>67E88483-39A6-491C-BDEC-E26DC64EF2ED</ProjectID>
 
@@ -45,13 +45,13 @@
 <ZoomPanHints>0</ZoomPanHints>
 <ClipBin_Array>
 <ClipBin_Object>
-<ClipName>D:\www\lightbot\resources\other\camtasia\capture-3.camrec</ClipName>
+<ClipName>D:\www\codingjr\resources\other\camtasia\capture-3.camrec</ClipName>
 </ClipBin_Object>
 </ClipBin_Array>
 
 <DShowControl_ClipMap>
 <DShowControl_ClipMap_Object>
-<FileName>tscrec7://d:\www\lightbot\resources\other\camtasia\capture-3.camrec!screen_stream.avi</FileName>
+<FileName>tscrec7://d:\www\codingjr\resources\other\camtasia\capture-3.camrec!screen_stream.avi</FileName>
 <PPTFile></PPTFile>
 <FromPPT>0</FromPPT>
 <Track>0</Track>

@@ -90,8 +90,8 @@ export function createMedia() {
         if (!btn) continue;
         btn.setAttribute('aria-pressed', isEnabled ? 'true' : 'false');
 
-        var onIcon = btn.querySelector('.lb-audio-on');
-        var offIcon = btn.querySelector('.lb-audio-off');
+        var onIcon = btn.querySelector('.cjr-audio-on');
+        var offIcon = btn.querySelector('.cjr-audio-off');
 
         if (onIcon && onIcon.classList) onIcon.classList.toggle('hidden', !isEnabled);
         if (offIcon && offIcon.classList) offIcon.classList.toggle('hidden', isEnabled);

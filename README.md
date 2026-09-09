@@ -1,123 +1,75 @@
-# Lightbot
+# CodingJr Bot Lab
 
-Lightbot is an educational puzzle game about programming and logical thinking.
+**CodingJr Bot Lab** is an interactive educational puzzle game designed to introduce students to programming, algorithms, and computational thinking.
 
-The player controls a small robot and must guide it to light up all blue tiles in each level.  
-Instead of moving the robot directly, you build a **program** from simple instructions  
-(move, turn, jump, light up, repeat, etc.). This makes Lightbot well-suited for
-introductory courses on algorithms, control flow, and problem decomposition.
+The player programs a friendly robot to navigate 3D isometric tile maps, jump across elevation changes, repeat loops, and light up all goal tiles.
 
 ---
 
-## Play online
+## Key Features
 
-You can play Lightbot directly in your browser:
-
-- https://lightbot.lu
-
-No installation or account is required for the online version.
-
----
-
-## Downloading and running Lightbot locally
-
-1. Download the latest release from the Releases page.
-2. Unpack the archive.
-3. Open `index.html` in your browser (no server required).
+- **Algorithmic Thinking:** Learn core computer science concepts such as sequencing, procedures, and loops.
+- **Visual Drag & Drop Editor:** Assemble code blocks with intuitive drag-and-drop powered by SortableJS.
+- **Nested Loops:** Master code efficiency by placing loops inside loops.
+- **Multilingual Support:** Full localization in English, German, and French.
+- **Theme Customization:** Multiple color themes powered by TailwindCSS & DaisyUI.
+- **Offline Ready:** Single-file distribution allows double-click execution anywhere without internet or servers.
 
 ---
 
-## Localization
+## Getting Started
 
-The release build is static, so you cannot add a new localization by editing files after download.
-New languages must be added in the source and released as part of the project.
+### Prerequisites
 
-Translations live in:
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/)
 
-```text
-src/locales/translations.en.js
-src/locales/translations.de.js
-src/locales/translations.fr.js
-```
+### Installation
 
-### Best practice for contributing a new language
-
-1. Copy an existing file (for example `translations.en.js`) to a new file like `translations.it.js`.
-2. Translate only the **values** (right-hand side). Keep all keys exactly the same.
-3. Add the new language to the i18n resources in `src/lightbot/lightbot.view.canvas.ui.translate.js`.
-4. Add the language option to the language selector in `index.html`.
-5. Open a Pull Request with the new file.
-
-Only Pull Requests are accepted for new translations.
-
----
-
-## Building from source
-
-If you prefer to build the game yourself (or modify the code):
-
-1. **Clone the repository**
-
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/haan/Lightbot.git
-   cd Lightbot
+   git clone https://github.com/uday-bhardwaj-15/codingjr-lightbot-lab.git
+   cd codingjr-lightbot-lab
    ```
 
-2. **Install dependencies**
-
-   Make sure you have [Node.js](https://nodejs.org/) installed, then run:
-
+2. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Start the dev server**
-
+3. **Start the local development server:**
    ```bash
    npm run dev
    ```
 
-4. **Build the game**
+---
 
-   ```bash
-   npm run build
-   ```
+## Building for Production
 
-   This outputs a production build to `dist/`.
+### Standalone Single-File Offline Build
+Generates a self-contained `dist/index.html` file that can be distributed directly to students:
+```bash
+npm run build
+```
 
-5. **Run locally**
-
-   Open `dist/index.html` in your browser.
+### Web Hosted Build
+Generates assets in `dist-web/` optimized for hosting on web servers or CDNs:
+```bash
+npm run build:web
+```
 
 ---
 
-## Using Lightbot in teaching
+## Tech Stack
 
-Lightbot was designed with teaching in mind. Typical use cases include:
-
-- Introducing **basic programming concepts** (sequencing, loops, conditionals)
-- Practicing **algorithmic thinking** and planning
-- Comparing different solutions for **efficiency** (shorter programs vs. more steps)
-
-Teachers are free to:
-
-- Run the online version in class
-- Provide a local copy built from the Releases page
-- Fork the repository and customize levels and interface to their needs
-
----
-
-## Credits
-
-- Development: Laurent Haan  
-- Interface: Zenobia Homan  
-- Robot artwork: surt  
-- Music: hektikmusic  
-- Original Lightbot concept: https://lightbot.com/
+- **Runtime:** Vanilla JavaScript (ES Modules), HTML5 Canvas 2D, HTML5 Audio
+- **Styling:** TailwindCSS v4, DaisyUI v5, theme-change
+- **UI Components & Drag-Drop:** SortableJS
+- **Localization:** i18next
+- **Build System:** Vite 6, vite-plugin-singlefile
 
 ---
 
 ## License
 
-This project is released under the **MIT License**.  
-See the [`LICENSE`](LICENSE) file for the full license text.
+This project is open source and available under the [MIT License](LICENSE).
