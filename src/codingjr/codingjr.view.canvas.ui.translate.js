@@ -58,10 +58,22 @@ function updateDocumentLanguage(language) {
   document.documentElement.setAttribute("lang", language);
 }
 
+var LANGUAGE_DISPLAY_NAMES = {
+  en: "English",
+  de: "Deutsch",
+  fr: "Français",
+};
+
 function updateLanguageSelect(language) {
-  var select = document.getElementById("languageSelect");
-  if (!select) return;
-  select.value = language;
+  var selects = document.querySelectorAll("#languageSelect, .cjr-language-select");
+  selects.forEach(function (select) {
+    select.value = language;
+  });
+
+  var labels = document.querySelectorAll("#currentLanguageLabel, .cjr-current-lang-text");
+  labels.forEach(function (el) {
+    el.textContent = LANGUAGE_DISPLAY_NAMES[language] || language.toUpperCase();
+  });
 }
 
 function updateRunButtonTitle() {
@@ -81,13 +93,14 @@ function handleLanguageChange(language) {
 }
 
 function initLanguageSelect() {
-  var select = document.getElementById("languageSelect");
-  if (!select) return;
-  select.addEventListener("change", function () {
-    var resolved = resolveLanguage(select.value) || FALLBACK_LANGUAGE;
-    if (resolved === i18next.language) return;
-    i18next.changeLanguage(resolved).catch(function (e) {
-      console.error("Failed to change language:", e);
+  var selects = document.querySelectorAll("#languageSelect, .cjr-language-select");
+  selects.forEach(function (select) {
+    select.addEventListener("change", function () {
+      var resolved = resolveLanguage(select.value) || FALLBACK_LANGUAGE;
+      if (resolved === i18next.language) return;
+      i18next.changeLanguage(resolved).catch(function (e) {
+        console.error("Failed to change language:", e);
+      });
     });
   });
 }

@@ -49,26 +49,36 @@ function initThemeController() {
 }
 
 function initSettingsPopover() {
-  var dropdown = document.getElementById("settingsDropdown");
-  var btn = document.getElementById("settingsDropdownBtn");
-  if (!dropdown || !btn) return;
+  var dropdowns = document.querySelectorAll(".dropdown");
+  dropdowns.forEach(function (dropdown) {
+    var btn = dropdown.querySelector(":scope > button, :scope > [tabindex='0']");
+    if (!btn) return;
 
-  btn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    dropdown.classList.toggle("dropdown-open");
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var wasOpen = dropdown.classList.contains("dropdown-open");
+      dropdowns.forEach(function (d) {
+        d.classList.remove("dropdown-open");
+      });
+      if (!wasOpen) {
+        dropdown.classList.add("dropdown-open");
+      }
+    });
+
+    var content = dropdown.querySelector(".dropdown-content");
+    if (content) {
+      content.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
   });
 
-  var content = dropdown.querySelector(".dropdown-content");
-  if (content) {
-    content.addEventListener("click", function (e) {
-      e.stopPropagation();
-    });
-  }
-
   document.addEventListener("click", function (e) {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("dropdown-open");
-    }
+    dropdowns.forEach(function (dropdown) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("dropdown-open");
+      }
+    });
   });
 }
 
