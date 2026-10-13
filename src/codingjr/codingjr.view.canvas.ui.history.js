@@ -101,25 +101,33 @@ export function initHistory(app) {
     }
   }
 
-  app.ui.History = {
-    pushState: function (data) {
-      safePushState(data);
-    }
-  };
-
-  window.addEventListener("popstate", function (event) {
+  function onPopState(event) {
     var state = (event && event.state) ? event.state : null;
     if (!state) state = hashToState(window.location.hash);
     if (!state) state = { page: "welcomeScreen" };
     applyState(state);
-  });
+  }
 
-  window.addEventListener("hashchange", function () {
+  function onHashChange() {
     var state = hashToState(window.location.hash);
     if (!state) return;
     safeReplaceState(state);
     applyState(state);
-  });
+  }
+
+  window.addEventListener("popstate", onPopState);
+  window.addEventListener("hashchange", onHashChange);
+
+  app.ui.History = {
+    pushState: function (data) {
+      safePushState(data);
+    },
+    destroy: function () {
+      window.removeEventListener("popstate", onPopState);
+      window.removeEventListener("hashchange", onHashChange);
+      _historyInitialized = false;
+    }
+  };
 
   var initialState = window.history && window.history.state ? window.history.state : null;
   if (!initialState) initialState = hashToState(window.location.hash);

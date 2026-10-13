@@ -31,18 +31,19 @@ export function initDialogs(params) {
   var achievements = params.achievements;
   if (!ui || !achievements) return;
 
+  var eventOpts = params.signal ? { signal: params.signal } : undefined;
   var levelComplete = getDialog("levelCompleteDialog");
   if (levelComplete) {
     levelComplete.addEventListener("close", function () {
       ui.showLevelSelectScreen();
-    });
+    }, eventOpts);
   }
 
   var achievementDialog = getDialog("achievementDialog");
   if (achievementDialog) {
     achievementDialog.addEventListener("close", function () {
       achievements.display();
-    });
+    }, eventOpts);
   }
 }
 

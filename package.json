@@ -6,11 +6,10 @@
   "packageManager": "npm@11.19.0",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --config vite.offline.config.mjs",
-    "build:web": "vite build --outDir dist-web",
-    "preview": "vite preview",
-    "clean": "rimraf dist dist-web",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "clean": "rimraf .next dist dist-web",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -27,7 +26,12 @@
     "url": "git+https://github.com/uday-bhardwaj-15/codingjr-lightbot-lab.git"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "i18next": "^26.3.6",
+    "next": "^16.4.0",
+    "postcss": "^8.5.30",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "sortablejs": "^1.15.6",
     "theme-change": "^3.0.4"
   }

@@ -221,30 +221,31 @@ export function createUi(params) {
       ui._setRenderLoopState(true);
     },
 
-    initButtons: function () {
+    initButtons: function (options) {
+      var eventOpts = options && options.signal ? { signal: options.signal } : undefined;
       // Screen navigation buttons.
       document.querySelectorAll(".helpButton").forEach(function (el) {
         el.addEventListener("click", function () {
           ui.showHelpScreen();
-        });
+        }, eventOpts);
       });
 
       document.querySelectorAll(".mainMenuButton").forEach(function (el) {
         el.addEventListener("click", function () {
           ui.showWelcomeScreen();
-        });
+        }, eventOpts);
       });
 
       document.querySelectorAll(".achievementsButton").forEach(function (el) {
         el.addEventListener("click", function () {
           ui.showAchievementsScreen();
-        });
+        }, eventOpts);
       });
 
       document.querySelectorAll(".levelSelectButton").forEach(function (el) {
         el.addEventListener("click", function () {
           ui.showLevelSelectScreen();
-        });
+        }, eventOpts);
       });
 
       var levelList = document.getElementById("levelList");
@@ -254,13 +255,13 @@ export function createUi(params) {
           if (!tile) return;
           // open the selected level.
           ui.showGameScreen(parseInt(tile.getAttribute("data-level"), 10));
-        });
+        }, eventOpts);
       }
 
       document.querySelectorAll(".audioToggleButton").forEach(function (el) {
         el.addEventListener("click", function () {
           media.toggleAudio();
-        });
+        }, eventOpts);
       });
 
       // Gameplay controls.
@@ -278,7 +279,7 @@ export function createUi(params) {
             bot.execute();
             ui._setRunButtonState(true);
           }
-        });
+        }, eventOpts);
       }
 
       var clearButton = document.getElementById("clearButton");
@@ -288,7 +289,7 @@ export function createUi(params) {
           var list = document.querySelector("#programContainer ul");
           if (list) list.textContent = "";
           editor.saveProgram();
-        });
+        }, eventOpts);
       }
 
       // Help accordion: swap the demo video when selecting a help topic.
@@ -302,11 +303,12 @@ export function createUi(params) {
           if (!holder) return;
           var idx = parseInt(holder.getAttribute("data-video"), 10);
           if (!isNaN(idx)) media.playVideo(idx);
-        });
+        }, eventOpts);
       }
     },
 
-    initSlider: function () {
+    initSlider: function (options) {
+      var eventOpts = options && options.signal ? { signal: options.signal } : undefined;
       var slider = document.getElementById("speedSlider");
       if (!slider) return;
 
@@ -314,10 +316,10 @@ export function createUi(params) {
       slider.value = String(speed.get());
       slider.addEventListener("input", function () {
         speed.set(parseFloat(slider.value));
-      });
+      }, eventOpts);
       slider.addEventListener("change", function () {
         speed.set(parseFloat(slider.value));
-      });
+      }, eventOpts);
     },
   };
 

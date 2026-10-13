@@ -222,7 +222,8 @@ export function createEditor(params) {
       return this.getInstructions(getListItems(list));
     },
 
-    initEditor: function () {
+    initEditor: function (options) {
+      var eventOpts = options && options.signal ? { signal: options.signal } : undefined;
       var container = document.getElementById("programContainer");
       if (!container) return;
 
@@ -233,7 +234,7 @@ export function createEditor(params) {
         if (t.tagName === "INPUT" && t.type === "number") {
           editor.saveProgram();
         }
-      });
+      }, eventOpts);
 
       // handle remove buttons inside the program.
       container.addEventListener("click", function (e) {
@@ -245,7 +246,7 @@ export function createEditor(params) {
         if (li) li.remove();
         editor._cleanupProgramSortables();
         editor.saveProgram();
-      });
+      }, eventOpts);
 
       editor.makeDroppable();
     },
@@ -492,6 +493,23 @@ export function createEditor(params) {
         }
       }
       return out;
+    },
+    destroy: function () {
+      if (this._instructionSortable) {
+        try { this._instructionSortable.destroy(); } catch (e) {}
+        this._instructionSortable = null;
+      }
+      for (var i = 0; i < this._programSortables.length; i++) {
+        var s = this._programSortables[i];
+        if (s) {
+          try { s.destroy(); } catch (e) {}
+        }
+      }
+      this._programSortables = [];
+      var lists = getAllProgramLists();
+      forEachNode(lists, function (el) {
+        if (el) delete el._codingjrSortable;
+      });
     },
   };
 

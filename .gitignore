@@ -8,7 +8,7 @@ pnpm-lock.yaml
 # Logs
 logs/
 *.log
-
+.next
 # OS / editor junk
 .DS_Store
 Thumbs.db
@@ -19,6 +19,7 @@ Desktop.ini
 *.tmp
 
 # Build artifacts
+.next/
 /deploy/
 dist/
 dist-web/

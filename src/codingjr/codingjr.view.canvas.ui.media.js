@@ -119,6 +119,14 @@ export function createMedia() {
       } else {
         this.toggleAudioOn();
       }
+    },
+    destroy: function() {
+      if (this.audioEl) {
+        this.audioEl.pause();
+        this.audioEl.src = "";
+      }
+      this.audioEnabled = false;
+      this.syncAudioButtonState();
     }
   };
 
