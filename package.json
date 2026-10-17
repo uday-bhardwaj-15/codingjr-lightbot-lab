@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
-    "daisyui": "^5.7.16",
-    "eslint": "10.10.0",
+    "daisyui": "^5.7.50",
+    "eslint": "10.12.0",
     "rimraf": "^6.1.2",
     "tailwindcss": "^4.3.3",
     "vite": "^6.2.0",
@@ -27,7 +27,7 @@
     "url": "git+https://github.com/uday-bhardwaj-15/codingjr-lightbot-lab.git"
   },
   "dependencies": {
-    "i18next": "^26.3.6",
+    "i18next": "^26.4.4",
     "sortablejs": "^1.15.6",
     "theme-change": "^3.0.4"
   }
